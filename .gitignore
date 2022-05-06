@@ -1,5 +1,5 @@
 # Ignore everything in this directory
-target
+# target
 # mvnw
 # mvnw.cmd
 .classpath
@@ -9,6 +9,6 @@ target
 .idea
 .metadata
 .recommenders
-.mvn
+# .mvn
 .DS_Store
 .gradle
