@@ -1,7 +1,7 @@
 FROM maven:3.6.3-jdk-11 AS builder
 
 WORKDIR /usr/src/api
-COPY pom.xml .
+COPY ../pom.xml .
 RUN mvn -B dependency:go-offline
 
 COPY . .
