@@ -105,10 +105,11 @@ contract
 git remote add gogs $(kubectl get svc gogs -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:3000/kiamol/contract.git')
 ```
 
-# push the code to your server--authenticate with 
-# username kiamol and password kiamol 
+## push the code to your server--authenticate with 
+## username kiamol and password kiamol 
 ```
 git push --set-upstream gogs master
+git push gogs
 ```
 
 ## find the server URL:
