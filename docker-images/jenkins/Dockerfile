@@ -23,7 +23,7 @@ RUN tar xvf buildkit.tar.gz
 
 FROM download-base AS helm
 #ARG HELM_VERSION="v3.6.2"
-ARG HELM_VERSION="v3.2.4"
+ARG HELM_VERSION="v3.7.2"
 RUN wget -O helm.tar.gz "https://get.helm.sh/helm-$HELM_VERSION-linux-$(cat /arch2.txt).tar.gz"
 RUN tar xvf helm.tar.gz --strip-components 1
 
