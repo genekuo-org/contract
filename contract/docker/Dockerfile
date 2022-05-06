@@ -1,14 +1,20 @@
-FROM openjdk:alpine
+FROM maven:3.6.3-jdk-11 AS builder
 
-MAINTAINER Gene Kuo
+WORKDIR /usr/src/api
+COPY pom.xml .
+RUN mvn -B dependency:go-offline
 
-ENV APP_HOME /app/
+COPY . .
+RUN mvn package
 
-COPY target/contract-0.0.1-SNAPSHOT.jar $APP_HOME
+# app
+FROM openjdk:11.0.11-jre-slim-buster
+
+WORKDIR /app
+COPY --from=builder /usr/src/api/target/contract-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/contract-0.0.1-SNAPSHOT.jar"]
 
-WORKDIR $APP_HOME
-
-# set env variables when starting the container
-CMD java -jar contract-0.0.1-SNAPSHOT.jar
+ENV JRE_VERSION="11.0.11" \
+    APP_VERSION="0.0.1"

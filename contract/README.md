@@ -161,6 +161,11 @@ cd contract/contract/
 ```
 buildctl build --frontend=gateway.v0  --opt source=kiamol/buildkit-buildpacks
               --local context=src --output type=image,name=genedocker/contract:buildkit
+buildctl build \
+ --frontend=dockerfile.v0 \
+ --local context=./src \
+ --local dockerfile=./src/docker \
+ --output type=image,name=name=genedocker/contract:buildkit
 ```
 
 ## leave the session when the build completes
