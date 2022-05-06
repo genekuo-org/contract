@@ -1,4 +1,4 @@
-# EShop demo application
+# Contract application
 
 ## How to build source code?
 
@@ -105,8 +105,8 @@ contract
 git remote add gogs $(kubectl get svc gogs -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:3000/kiamol/contract.git')
 ```
 
-# push the code to your server--authenticate with 
-# username kiamol and password kiamol 
+## push the code to your server--authenticate with 
+## username kiamol and password kiamol 
 ```
 git push --set-upstream gogs master
 ```
@@ -117,3 +117,34 @@ kubectl get svc gogs -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:300
 ```
 
 ## browse and sign in with the same kiamol credentials
+
+## deploy BuildKit:
+kubectl apply -f infrastructure/buildkitd.yaml
+
+## wait for it to spin up:
+kubectl wait --for=condition=ContainersReady pod -l app=buildkitd
+
+## verify that Git and BuildKit are available:
+kubectl exec deploy/buildkitd -- sh -c 'git version && buildctl --version'
+
+## check that Docker isn’t installed--this command will fail:
+kubectl exec deploy/buildkitd -- sh -c 'docker version'
+
+## connect to a session on the BuildKit Pod:
+kubectl exec -it deploy/buildkitd -- sh
+
+## clone the source code from your Gogs server:
+cd ~
+git clone http://gogs:3000/kiamol/contract.git
+
+# switch to the app directory:
+cd contract/contract/
+
+# build the app using BuildKit; the options tell BuildKit
+# to use Buildpacks instead of a Dockerfile as input and to 
+# produce an image as the output:
+buildctl build --frontend=gateway.v0  --opt source=kiamol/buildkit-buildpacks
+              --local context=src --output type=image,name=genedocker/contract:buildkit
+
+# leave the session when the build completes
+exit

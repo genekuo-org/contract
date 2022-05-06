@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: buildkitd
   labels:
-    kiamol: ch11
+    etechpro: microservices
 spec:
   ports:
   - port: 1234
@@ -16,7 +16,7 @@ kind: Deployment
 metadata:
   name: buildkitd
   labels:
-    kiamol: ch11
+    etechpro: microservices
 spec:
   replicas: 1
   selector:
