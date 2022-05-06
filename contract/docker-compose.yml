@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  contract:
+    image: genedocker/contract:dev
+    ports:
+      - 8010:8080
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile

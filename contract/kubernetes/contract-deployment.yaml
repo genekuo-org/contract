@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  contract
+  labels:
+    etechpro: microservices
+    app: contract
+spec:
+  selector:
+    matchLabels:
+      app: contract
+  template:
+    metadata:
+      labels:
+        app: contract
+    spec:
+      containers:
+        - name: contract
+          image: genedocker/contract:dev
+          imagePullPolicy: IfNotPresent 
+          ports:
+            - name: http
+              containerPort: 8080
