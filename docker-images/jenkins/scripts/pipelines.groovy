@@ -17,7 +17,7 @@ def jenkins = Jenkins.instance;
 def scm = new GitSCM(gitUrl)
 scm.branches = [new BranchSpec("*/master")];
 def workflowJob = new WorkflowJob(jenkins, "${gitRepo}");
-workflowJob.definition = new CpsScmFlowDefinition(scm, "contract/contract/Jenkinsfile");
+workflowJob.definition = new CpsScmFlowDefinition(scm, "contract/Jenkinsfile");
 def gitTrigger = new SCMTrigger("* * * * *");
 workflowJob.addTrigger(gitTrigger);
 workflowJob.disabled = true;
