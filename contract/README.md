@@ -231,3 +231,5 @@ git push gogs
 kubectl get pods -n contract -l app.kubernetes.io/name=contract -o=custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image
 
 # browse back to the app
+
+helm rollback contract 1 --namespace contract
