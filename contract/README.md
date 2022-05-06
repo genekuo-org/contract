@@ -94,21 +94,26 @@ kubectl apply -f infrastructure/gogs.yaml
 kubectl wait --for=condition=ContainersReady pod -l app=gogs
 ```
 
+## Create a private repository from browser http://localhost:3000/kiamol
+```
+contract
+```
+
 ## add your local Git server to the repository--
 ## this grabs the URL from the Service to use as the target:
 ```
-git remote add gogs $(kubectl get svc gogs -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:3000/kiamol/kiamol.git')
+git remote add gogs $(kubectl get svc gogs -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:3000/kiamol/contract.git')
 ```
 
 # push the code to your server--authenticate with 
 # username kiamol and password kiamol 
 ```
-git push gogs
+git push --set-upstream gogs master
 ```
 
-# find the server URL:
+## find the server URL:
 ```
 kubectl get svc gogs -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:3000'
 ```
 
-# browse and sign in with the same kiamol credentials
+## browse and sign in with the same kiamol credentials
