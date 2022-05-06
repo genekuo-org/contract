@@ -159,8 +159,10 @@ cd contract/contract/
 ## to use Buildpacks instead of a Dockerfile as input and to 
 ## produce an image as the output:
 ```
-buildctl build --frontend=gateway.v0  --opt source=kiamol/buildkit-buildpacks
-              --local context=src --output type=image,name=genedocker/contract:buildkit
+buildctl build --frontend=gateway.v0  \
+--opt source=kiamol/buildkit-buildpacks \
+--local context=src \
+--output type=image,name=genedocker/contract:buildkit
 ```
 
 ## leave the session when the build completes
