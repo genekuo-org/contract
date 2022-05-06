@@ -164,7 +164,7 @@ buildctl build --frontend=gateway.v0  --opt source=kiamol/buildkit-buildpacks
 buildctl build \
  --frontend=dockerfile.v0 \
  --local context=./src \
- --local dockerfile=./docker \
+ --local dockerfile=. \
  --output type=image,name=name=genedocker/contract:buildkit
 ```
 
