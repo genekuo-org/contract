@@ -214,10 +214,20 @@ kubectl get svc jenkins -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:
 ## click enable for the Kiamol job and wait . . .
 
 ## when the pipeline completes, check the deployment:
-kubectl get pods -n contract -l app.kubernetes.io/name=contract
--o=custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image
+kubectl get pods -n contract -l app.kubernetes.io/name=contract -o=custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image
 ## find the URL of the test app:
-kubectl get svc -n contract contract
--o jsonpath='http://{.status.loadBalancer.ingress[0].*}:8012'
+kubectl get svc -n contract contract -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:8012/create'
 
 ## browse
+
+## add your code change, and push it to Git:
+git add -A .
+git commit -m 'Ad descriptions'
+git push gogs
+
+# browse back to Jenkins, and wait for the new build to finish
+
+# check that the application Pod is using the new image version:
+kubectl get pods -n kiamol-ch11-test -l app.kubernetes.io/name=contract -o=custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image
+
+# browse back to the app
