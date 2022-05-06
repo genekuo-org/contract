@@ -159,11 +159,9 @@ cd contract/contract/
 ## to use Buildpacks instead of a Dockerfile as input and to 
 ## produce an image as the output:
 ```
-buildctl build --frontend=gateway.v0  --opt source=kiamol/buildkit-buildpacks
-              --local context=src --output type=image,name=genedocker/contract:buildkit
 buildctl build \
  --frontend=dockerfile.v0 \
- --local context=./src \
+ --local context=. \
  --local dockerfile=. \
  --output type=image,name=name=genedocker/contract:buildkit
 ```
@@ -172,3 +170,54 @@ buildctl build \
 ```
 exit
 ```
+
+## create a new namespace:
+kubectl create namespace contract
+
+## collect the details--on Windows: 
+```
+. .\set-registry-variables.ps1
+```
+
+## OR on Linux/Mac:
+```. ./set-registry-variables.sh
+```
+
+## create the Secret using the details from the script:
+```
+kubectl create secret docker-registry registry-creds --docker-server=$REGISTRY_SERVER --docker-username=$REGISTRY_USER --docker-password=$REGISTRY_PASSWORD
+```
+
+## show the Secret details:
+```
+kubectl get secret registry-creds
+```
+
+## deploy Jenkins:
+kubectl apply -f infrastructure/jenkins.yaml
+
+## wait for the Pod to spin up:
+kubectl wait --for=condition=ContainersReady pod -l app=jenkins
+
+## check that kubectl can connect to the cluster:
+kubectl exec deploy/jenkins -- sh -c 'kubectl version --short'
+
+## check that the registry Secret is mounted:
+kubectl exec deploy/jenkins -- sh -c 'ls -l /root/.docker'
+
+## get the URL for Jenkins:
+kubectl get svc jenkins -o jsonpath='http://{.status.loadBalancer.ingress[0].*}:8080'
+
+## browse and login with username kiamol and password kiamol; 
+## if Jenkins is still setting itself up you’ll see a wait screen
+
+## click enable for the Kiamol job and wait . . .
+
+## when the pipeline completes, check the deployment:
+kubectl get pods -n contract -l app.kubernetes.io/name=contract
+-o=custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image
+## find the URL of the test app:
+kubectl get svc -n contract contract
+-o jsonpath='http://{.status.loadBalancer.ingress[0].*}:8012'
+
+## browse

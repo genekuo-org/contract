@@ -13,8 +13,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-              echo "Building image tag: ${REGISTRY_SERVER}/${REGISTRY_USER}/bulletin-board:${BUILD_NUMBER}-kiamol"
-              dir ('ch11/bulletin-board') {
+              echo "Building image tag: ${REGISTRY_SERVER}/${REGISTRY_USER}/contract:${BUILD_NUMBER}-kiamol"
+              dir ('contract/contract') {
                 sh 'chmod +x ci/build.sh && ./ci/build.sh'
               }
             }
@@ -22,7 +22,7 @@ pipeline {
         stage('Run') {
             steps {
               echo "Deploying to test"
-              dir ('ch11/bulletin-board') {
+              dir ('contract/contract') {
                 sh 'chmod +x ci/run.sh && ./ci/run.sh'
               }
             }
