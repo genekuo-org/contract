@@ -228,6 +228,6 @@ git push gogs
 # browse back to Jenkins, and wait for the new build to finish
 
 # check that the application Pod is using the new image version:
-kubectl get pods -n kiamol-ch11-test -l app.kubernetes.io/name=contract -o=custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image
+kubectl get pods -n contract -l app.kubernetes.io/name=contract -o=custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image
 
 # browse back to the app
