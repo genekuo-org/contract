@@ -13,7 +13,7 @@ public class ContractController {
 
     @RequestMapping(value = "/create")
     public String checkout(@RequestHeader HttpHeaders headers) {
-        String result = "You have successfully create CI_CD your contract.";
+        String result = "You have successfully create V 7 CI_CD your contract.";
         return result;
     }
 }

@@ -232,4 +232,5 @@ kubectl get pods -n contract -l app.kubernetes.io/name=contract -o=custom-column
 
 # browse back to the app
 
+helm history contract --namespace contract
 helm rollback contract 1 --namespace contract
