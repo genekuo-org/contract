@@ -13,7 +13,7 @@ public class ContractController {
 
     @RequestMapping(value = "/create")
     public String checkout(@RequestHeader HttpHeaders headers) {
-        String result = "You have successfully create your contract V16.";
+        String result = "You have successfully create your contract V23.";
         return result;
     }
 }
