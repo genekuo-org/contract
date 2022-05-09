@@ -1,0 +1,11 @@
+version: '3.0'
+services:
+  contract-db:
+    container_name: contract-db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'contract'
+      MYSQL_ROOT_PASSWORD: 'kiamol'
+    ports:
+      - 3310:3306

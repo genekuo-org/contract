@@ -1,0 +1,39 @@
+{{#tags}}
+{{#ifReleaseTag .}}
+## [{{name}}](https://github.com/genekuo/{ownerName}}/{{repoName}}/-/tags/{{name}}) ({{tagDate .}})
+              https://github.com/genekuo/{ownerName}}/{{repoName}}
+
+{{#ifContainsBreaking commits}}
+### Breaking changes
+
+{{#commits}}
+  {{#ifCommitBreaking .}}
+- {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/genekuo/{{ownerName}}/{{repoName}}/commit/{{hash}}))
+  {{/ifCommitBreaking}}
+{{/commits}}
+{{/ifContainsBreaking}}
+
+
+{{#ifContainsType commits type='feat'}}
+### Features
+
+{{#commits}}
+  {{#ifCommitType . type='feat'}}
+- {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/genekuo/{{ownerName}}/{{repoName}}/commit/{{hash}}))
+  {{/ifCommitType}}
+{{/commits}}
+{{/ifContainsType}}
+
+
+{{#ifContainsType commits type='fix'}}
+### Bug Fixes
+
+{{#commits}}
+  {{#ifCommitType . type='fix'}}
+- {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/genekuo/{{ownerName}}/{{repoName}}/commit/{{hash}}))
+  {{/ifCommitType}}
+{{/commits}}
+{{/ifContainsType}}
+
+{{/ifReleaseTag}}
+{{/tags}}
