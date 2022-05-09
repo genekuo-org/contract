@@ -8,7 +8,8 @@ docker-build: build
 	rm -rf $(DOCKER_TMP)
 	mkdir $(DOCKER_TMP)
 	cp $(BINARY_NAME) $(DOCKER_TMP)
-	cp ./docker/Dockerfile $(DOCKER_TMP)Dockerfile
+	cp ./Dockerfile $(DOCKER_TMP)Dockerfile
+	cp ./pom.xml $(DOCKER_TMP)pom.xml
 	docker build -t $(DOCKER_TAG) $(DOCKER_TMP)
 	rm -rf $(DOCKER_TMP)
 build:
