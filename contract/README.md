@@ -3,6 +3,7 @@
 ## How to build source code?
 
 ```bash
+cd /template/contract
 make
 ```
 
@@ -25,19 +26,13 @@ java -jar target/contract-0.0.1-SNAPSHOT.jar --server.port=8888
 
 Use curl command or open url ```127.0.0.1:8888/contract/1``` in the browser. You should be able to see output.
 
-## Switch to this folder in the source code:
-```
-cd template
-```
-
 ## Build the app:
 ```
-docker-compose -f contract/docker-compose.yml build
+docker-compose -f docker-compose.yml build
 ```
 
 ## Run the app and test:
 ```
-cd contract
 ./test.sh start stop
 ```
 
@@ -48,7 +43,7 @@ docker ps
 
 ## Deploy in Kubernetes:
 ```
-kubectl apply -f contract/kubernetes/
+kubectl apply -f kubernetes/
 ```
 
 ## Get the new URL:
@@ -67,12 +62,12 @@ mvn clean package
 ## Rebuild
 ```
 cd ..
-docker-compose -f contract/docker-compose.yml build
+docker-compose -f docker-compose.yml build
 ```
 
 ## Redeploy
 ```
-kubectl apply -f contract/kubernetes/
+kubectl apply -f kubernetes/
 ```
 
 ## Delete the existing Pod to recreate it:
@@ -82,6 +77,7 @@ kubectl delete pod -l app=contract
 
 ## Deploy the Git server:
 ```
+cd ..
 kubectl apply -f infrastructure/gogs.yaml
 ```
 
