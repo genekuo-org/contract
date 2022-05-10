@@ -15,18 +15,23 @@ docker run -d --name demo \
   genedocker/contract
 ```
 
-## Functional tests without Docker
+## Build and run without Docker
 ```
 mvn clean package
 java -jar target/contract-0.0.1-SNAPSHOT.jar --server.port=8888
-./test.sh
+```
+
+## Browse swagger ui
+```
+http://localhost:8888/openapi/swagger-ui.html
+Ctrl+C
 ```
 
 ## Test the demo
 
 Use curl command or open url ```127.0.0.1:8888/contract/1``` in the browser. You should be able to see output.
 
-## Build the app:
+## Build the app image:
 ```
 docker-compose -f docker-compose.yml build
 ```

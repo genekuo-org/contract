@@ -1,0 +1,64 @@
+springdoc:
+  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs.path: /openapi/v3/api-docs
+  packagesToScan: com.etechpro.contract
+  pathsToMatch: /**
+
+api:
+
+  common:
+    version: 1.0.0
+    title: Sample API
+    description: Description of the API...
+    termsOfService: MY TERMS OF SERVICE
+    license: MY LICENSE
+    licenseUrl: MY LICENSE URL
+
+    externalDocDesc: MY WIKI PAGE
+    externalDocUrl: MY WIKI URL
+    contact:
+      name: NAME OF CONTACT
+      url: URL TO CONTACT
+      email: contact@mail.com
+
+  responseCodes:
+    ok.description: OK
+    badRequest.description: Bad Request, invalid format of the request. See response message for more information
+    notFound.description: Not found, the specified id does not exist
+    unprocessableEntity.description: Unprocessable entity, input parameters caused the processing to fail. See response message for more information
+
+  contract:
+
+    get-contract:
+      description: Returns a composite view of the specified contract id
+      notes: |
+        # Normal response
+        If the requested contract id is found the method will return information regarding:
+        1. Base contract information
+        1. Service Addresses (technical information regarding the addresses of the microservices that created the response)
+
+        # Expected partial and error responses
+        In the following cases, only a partial response be created (used to simplify testing of error conditions)
+
+        ## Contract id 113
+        200 - Ok
+
+        ## Contract id 213
+        200 - Ok
+
+        ## Non numerical contract id
+        400 - A **Bad Request** error will be returned
+
+        ## Contract id 13
+        404 - A **Not Found** error will be returned
+
+        ## Negative contract ids
+        422 - An **Unprocessable Entity** error will be returned
+
+server.port: 8080
+server.error.include-message: always
+
+logging:
+  level:
+    root: INFO
+    com.etechpro: DEBUG
