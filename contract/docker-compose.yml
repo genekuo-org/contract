@@ -4,7 +4,7 @@ services:
   contract:
     image: genedocker/contract:dev
     ports:
-      - 8080:8080
+      - 8888:8080
     build:
       context: .
       dockerfile: ./Dockerfile

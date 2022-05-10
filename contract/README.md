@@ -14,16 +14,16 @@ docker run -d --name demo \
   genedocker/contract
 ```
 
-## Functional tests
+## Functional tests without Docker
 ```
 mvn clean package
-java -jar target/contract-0.0.1-SNAPSHOT.jar --server.port=8083
-HOST=localhost PORT=8083 ./test.sh
+java -jar target/contract-0.0.1-SNAPSHOT.jar --server.port=8888
+./test.sh
 ```
 
 ## Test the demo
 
-Use curl command or open url ```127.0.0.1:8080/create``` in the browser. You should be able to see output as the followings.
+Use curl command or open url ```127.0.0.1:8888/contract/1``` in the browser. You should be able to see output.
 
 ## Switch to this folder in the source code:
 ```
@@ -35,21 +35,15 @@ cd template
 docker-compose -f contract/docker-compose.yml build
 ```
 
-## Run the app:
+## Run the app and test:
 ```
-docker-compose -f contract/docker-compose.yml up -d
+cd contract
+./test.sh start stop
 ```
 
 ## Check the running  containers:
 ```
 docker ps
-```
-
-## Browse to the app at http://localhost:8010/create
-
-## Stop the app in Compose:
-```
-docker-compose -f contract/docker-compose.yml down
 ```
 
 ## Deploy in Kubernetes:
