@@ -14,6 +14,13 @@ docker run -d --name demo \
   genedocker/contract
 ```
 
+## Functional tests
+```
+mvn clean package
+java -jar target/contract-0.0.1-SNAPSHOT.jar --server.port=8083
+HOST=localhost PORT=8083 ./test.sh
+```
+
 ## Test the demo
 
 Use curl command or open url ```127.0.0.1:8080/create``` in the browser. You should be able to see output as the followings.
