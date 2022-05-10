@@ -231,6 +231,10 @@ kubectl get svc -n contract contract -o jsonpath='http://{.status.loadBalancer.i
 ```
 
 ## Browse
+```
+http://localhost:8012/contract/1
+http://localhost:8012/openapi/swagger-ui.html
+```
 
 ## Add your code change, and push it to Git:
 ```
